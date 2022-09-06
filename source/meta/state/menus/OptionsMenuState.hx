@@ -54,6 +54,7 @@ class OptionsMenuState extends MusicBeatState
 				[
 					['preferences', callNewGroup],
 					['appearance', callNewGroup],
+					#if android ['android controls', openAndroidControlmenu],#end
 					['controls', openControlmenu],
 					['exit', exitMenu]
 				]
@@ -135,6 +136,10 @@ class OptionsMenuState extends MusicBeatState
 		add(infoText);
 
 		loadSubgroup('main');
+		
+		#if android
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
 	}
 
 	private var currentAttachmentMap:Map<Alphabet, Dynamic>;
@@ -560,6 +565,23 @@ class OptionsMenuState extends MusicBeatState
 			});
 		}
 	}
+
+	#if android
+	public function openAndroidControlmenu()
+	{
+		if (controls.ACCEPT)
+		{
+			FlxG.sound.play(Paths.sound('confirmMenu'));
+			lockedMovement = true;
+			FlxFlicker.flicker(activeSubgroup.members[curSelection], 0.5, 0.06 * 2, true, false, function(flick:FlxFlicker)
+			{
+				
+				openSubState(new android.AndroidControlsSubState());
+				lockedMovement = false;
+			});
+		}
+	}
+	#end
 
 	public function openControlmenu()
 	{
