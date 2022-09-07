@@ -136,6 +136,8 @@ class Main extends Sprite
 			// this just kind of sets up the camera zoom in accordance to the surface width and camera zoom.
 			// if set to negative one, it is done so automatically, which is the default.
 		}
+		
+		SUtil.check();
 
 		FlxTransitionableState.skipNextTransIn = true;
 
