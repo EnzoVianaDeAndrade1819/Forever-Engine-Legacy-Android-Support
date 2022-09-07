@@ -120,7 +120,7 @@ class Paths
 
 	public static function returnGraphic(key:String, ?library:String, ?textureCompression:Bool = false)
 	{
-		var path = getPath('images/$key.png', IMAGE, library);
+		var path = SUtil.getPath() + getPath('images/$key.png', IMAGE, library);
 		if (FileSystem.exists(path))
 		{
 			if (!currentTrackedAssets.exists(key))
